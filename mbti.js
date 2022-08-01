@@ -1,4 +1,4 @@
-// 0801 과제
+// 0801 과제_조준영
 // npm: node js를 위한 오픈소스 모듈 패키지
 // npm init: package.json 파일 만들기 --> 개발자가 배포한 패키지에 대해 다른 이들의 관리, 설치를 용이하게 함
 // npm install express: node_modules들 import --> 서버를 쉽게 만들도록 해줌
