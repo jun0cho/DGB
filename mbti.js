@@ -1,3 +1,8 @@
+// @@@@@@@@@@@@@@@@ 응답코드 알기 / 성공-실패 경우 나누어서 관리
+// @@@@@@@@@@@@@@@@ front - back 따로 만듦
+// @@@@@@@@@@@@@@@@ await / promise
+// @@@@@@@@@@@@@@@@ vue(front단) - express(back단)
+
 // 0801 과제_조준영
 // npm: node js를 위한 오픈소스 모듈 패키지
 // npm init: package.json 파일 만들기 --> 개발자가 배포한 패키지에 대해 다른 이들의 관리, 설치를 용이하게 함
@@ -6,12 +11,15 @@
 
 
 var http = require('http'); // 웹 서버 구동하기 위해 사용되는 모듈(createServer / close / listen)
-var fs = require('fs'); // 파일 입출력에 사용되는 모듈(FileSystem의 약자)
 var url = require('url'); // url 정보를 객체로 가져와서 분석하거나, 객체를 문자열로 바꿔주는 기능(parse / format / resolve)
-var qs = require('querystring'); 
+var qs = require('querystring');
 //  [parse] -->false: url객체의 query 속성을 "문자열" 형식으로 가져옴(false가 기본값)
-//             true: url객체의 query 속성을 "객체" 형식으로 가져옴 
-var express = require('express');
+//             true: url객체의 query 속성을 "객체" 형식으로 가져옴
+var { Client } = require('pg');
+
+
+var fs = require('fs'); // 파일 입출력에 사용되는 모듈(FileSystem의 약자)
+var express = require('express'); // @@@@@@@@@@@@@@@@@@@@@ front단의 미들웨어 X / back단(서버단)의 미들웨어 / front단의 서버를 따로 둬야함
 var bodyParser = require('body-parser');
 
 
@@ -148,8 +156,6 @@ var app = http.createServer(function(request,response){
             // // }
 
 // [Postgre DB 접속]
-            var { Client } = require('pg');
-
             const pg = new Client({
               user: "postgres",
               host: "127.0.0.1",
@@ -168,6 +174,9 @@ var app = http.createServer(function(request,response){
                 pg.end();
             });
 
+// @@@@@@@@@@@@@@@@@@@@@ 날짜 입력할 때 sql의 insert - update 기능 활용
+// @@@@@@@@@@@@@@@@@@@@@ key값을 통해 이미 입력된 날짜가 있는데 변경할지 물어보는 기능을 넣는 경우도 있음
+
 
             // // 수행하고 싶은 작업(sql문) 
             // // var sql = 'INSERT INTO tb_user(user_name, user_department, user_id, user_pw, user_email) VALUES(?,?,?,?,?)';
@@ -184,7 +193,7 @@ var app = http.createServer(function(request,response){
 
 
 // 전송 후 첫화면으로 돌아간다.
-            response.writeHead(302, {Location : `/`});
+            response.writeHead(302, {Location : `/`}); //302 무슨의미??@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
             response.end();
         })
 
