@@ -136,7 +136,7 @@ var app = http.createServer(function(request,response){
     // request.on('end', ()) --> 'data' 이벤트 끝나면 'end' 이벤트 발생
     // body = name=%ED%95%98&rank=%EC%9D%B4&mbti=%EB%A3%A8
     // post(object 형태) = [Object: null prototype] { name: '가', rank: '나', mbti: '다' }
-    // obj(json 형태) = { name: '가', rank: '나', mbti: '다' }
+    // obj(object 형태) = { name: '가', rank: '나', mbti: '다' }
     else if(pathname === '/join_process'){
         // join에서 submit 하면 여기에서 데이터를 db로 넘겨주자
         var body = '';
@@ -146,10 +146,10 @@ var app = http.createServer(function(request,response){
         request.on('end', function(req){
             var post = qs.parse(body);
             console.log(post)
-            console.log('======================')
+            console.log(typeof post + '======================')
             const obj = JSON.parse(JSON.stringify(post)); 
             console.log(obj)
-            console.log('======================')
+            console.log(typeof obj + '======================')
             var keys = Object.keys(obj);
             // // for (var i=0; i < keys.length; i++){
             // //     console.log(obj[keys[i]]);
