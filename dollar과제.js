@@ -1,10 +1,7 @@
- 
-a = '2022.12.01';
+var a = new Date('2022.08.27');
 
-b = a.split('.');
+var b = new Date('2022.09.03');
 
-console.log(b);
+var c = a.getTime() - b.getTime();
 
-if(a.split('.')[1] == '12'){
-    console.log('hello!!');
-}
+console.log(Math.abs(c / (1000*60*60*24))+1);

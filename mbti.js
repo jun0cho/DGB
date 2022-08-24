@@ -47,7 +47,7 @@ var app = http.createServer(function(request,response){
     if(pathname === '/'){ 
         if(queryData.id === undefined){
             var description = "환영합니다! : )";
-            response.writeHead(200);
+            response.writeHead(200); // 헤더정보 내보내기
             var template = ` 
             <!doctype html> 
             <html> 
@@ -62,7 +62,7 @@ var app = http.createServer(function(request,response){
             </body> 
             </html> `; 
             response.writeHead(200);
-            response.end(template); 
+            response.end(template); // 컨텐츠 출력 완료
         } else {
             var title = queryData.id;
             response.writeHead(200);
@@ -104,7 +104,7 @@ var app = http.createServer(function(request,response){
         </html>
         `;
         response.writeHead(200);
-        response.end(html);
+        response.end(html); // 컨텐츠 출력 완료
 
     } 
 
@@ -193,7 +193,11 @@ var app = http.createServer(function(request,response){
 
 
 // 전송 후 첫화면으로 돌아간다.
-            response.writeHead(302, {Location : `/`}); //302 무슨의미??@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+// 301 --> 완전히 다른 URL로 변경
+// 302 --> 임시적으로 다른 URL로 이동 => 기존 URL이 보유한 데이터 유지하면서 다른 URL에서 필요한 작업만 수행
+// ex) 인터넷쇼핑몰에서 랭킹이 높은 특정 상품이 품절인 경우 
+// 아예 랭킹을 바꾸지 않고 품절이라는 페이지만 임시로 보여주면 됨
+            response.writeHead(302, {Location : `/`}); // 3XX --> 클라이언트를 지정된 위치로 이동시키거나 참조하도록 함
             response.end();
         })
 
